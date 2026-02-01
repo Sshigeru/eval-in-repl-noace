@@ -1,7 +1,9 @@
-**eval-in-repl: Consistent ESS-like eval interface for various REPLs**
+**eval-in-repl: Consistent ESS-like eval interface for various REPLs (fork -> no ace-window/avy deps)**
 --------------------
 
 This package does what ESS does for R for various REPLs.
+
+This fork removes the ace-window dependency, which in turn removes dependency to avy.
 
 Emacs Speaks Statistics (ESS) package has a nice function called ess-eval-region-or-line-and-step, which is assigned to C-RET. This function sends a line or a selected region to the corresponding shell (R, Julia, Stata, etc) visibly. It also start up a shell if there is none.
 
