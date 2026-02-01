@@ -111,7 +111,7 @@ The following files are included in the package. There are respective dependenci
 
 The full configuration is the following. ```eval-in-repl.el``` is always necessary. Require other files as needed and configure the respective mode-specific key bindings.
 
-The REPL startup behavior has change in version 0.9.0. Previously, a specific window configuration (REPL on left, script on right, nothing else) was strictly enforced. The newer versions try to be less invasive. If only one window exists, necessarily window splitting occurs. The splitting behavior can be controlled by the ```eir-repl-placement``` option (either one of quoted symbols 'left, 'right, 'above, or 'below). When there are multiple windows present, you can choose which window to replace via ```ace-window``` for some languages (currently, IELM, Python, Hy, and shell only). For others, window splitting and replacement are controlled by the respective major/minor mode packages, and may be erratic.
+The REPL startup behavior has change in version 0.9.0. Previously, a specific window configuration (REPL on left, script on right, nothing else) was strictly enforced. The newer versions try to be less invasive. If only one window exists, necessarily window splitting occurs. The splitting behavior can be controlled by the ```eir-repl-placement``` option (either one of quoted symbols 'left, 'right, 'above, or 'below). When there are multiple windows present, for exactly 2 windows the REPL will replace the other window, and for 3+ windows it will split the current window. For others, window splitting and replacement are controlled by the respective major/minor mode packages, and may be erratic.
 
 The ```eir-always-split-script-window``` option introduced in version 0.9.1, when true, splits the current script window at REPL start up, but does not replace any other windows. This may be useful if you do not like to replace one of the windows that are already open, and create a new window for the REPL.
 
@@ -286,13 +286,14 @@ configuration when invoked to evaluate a line."
 **Version history**
 --------------------
 
+- 2024-12-XX 0.10.0 Remove ace-window dependency. When multiple windows are present, for exactly 2 windows the REPL will replace the other window, and for 3+ windows it will split the current window.
 - 2017-07-30 0.9.6 Fix the implementation for ```inf-ruby```.
 - 2017-07-30 0.9.5 Add ```eir-use-python-shell-send-string``` option (default to ```t```). This avoids errors on blank lines by using ```python-mode```'s ```python-shell-send-string``` function. However, this does not allow showing code in the REPL. To recover the old behavior, set to ```nil```.
 - 2016-12-24 0.9.4 Add ```eir-ielm-eval-in-current-buffer```. When this is ```t```, ielm's ```ielm-working-buffer``` is always changed to the current buffer prior to evaluation.
 - 2016-04-18 0.9.3 Drop cider REPL start up function since it was not working.
 - 2016-02-27 0.9.2 Deactivate selection explicitly as it is required in Emacs 25.
 - 2016-01-17 0.9.1 Add ```eir-always-split-script-window```, which when turned on, splits the current script window at REPL start up, but does not replace any other window.
-- 2016-01-01 0.9.0 Do not mess with the window layout at REPL startup (as much as before). ```eir-repl-placement``` option to control where the REPL shows up. New dependency on ```ace-window.el```.
+- 2016-01-01 0.9.0 Do not mess with the window layout at REPL startup (as much as before). ```eir-repl-placement``` option to control where the REPL shows up.
 - 2015-11-22 0.8.0 Add Javascript support (Thanks stardiviner); Drop essh.el dependency
 - 2015-09-05 0.7.0 Add Prolog support (Thanks m00nlight); no jump option for other languages
 - 2015-06-05 0.6.0 Add defcustom configuration to configure whether to jump after eval (Thanks arichiardi)

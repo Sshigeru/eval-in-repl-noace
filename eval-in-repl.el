@@ -5,8 +5,8 @@
 ;; Author: Kazuki YOSHIDA <kazukiyoshida@mail.harvard.edu>
 ;; Keywords: tools, convenience
 ;; URL: https://github.com/kaz-yos/eval-in-repl
-;; Version: 0.9.7
-;; Package-Requires: (dash paredit ace-window)
+;; Version: 0.10.0
+;; Package-Requires: (dash paredit)
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -69,7 +69,6 @@
 ;;; Require dependencies
 (require 'dash)
 (require 'paredit)
-(require 'ace-window)
 
 
 ;;;
@@ -197,9 +196,14 @@ Also split the current window when staring a REPL."
        ;; This does not allows control over where the REPL shows up.
        (exec-in-script nil)
 
-       ;; If mutiple windows exist, use ace-select-window
-       ;; 2 windows: switch; 3+ windows selection screen
-       ((> (count-windows) 1) (setq window-repl (ace-select-window)))
+       ;; If multiple windows exist, use the other window for 2 windows,
+       ;; or split current window for 3+ windows
+       ((> (count-windows) 1) 
+        (if (= (count-windows) 2)
+            ;; For exactly 2 windows, switch to the other window
+            (setq window-repl (next-window))
+          ;; For 3+ windows, split the current window
+          (setq window-repl (split-window window-script nil eir-repl-placement nil))))
 
        ;; If only 1 window exists, split it.
        (t (setq window-repl (split-window window-script nil eir-repl-placement nil))))

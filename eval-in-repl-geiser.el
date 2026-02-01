@@ -5,7 +5,7 @@
 ;; Author: Kazuki YOSHIDA <kazukiyoshida@mail.harvard.edu>
 ;; Keywords: tools, convenience
 ;; URL: https://github.com/kaz-yos/eval-in-repl
-;; Version: 0.9.4
+;; Version: 0.10.04
 ;; Package-Requires: ((emacs "24") (geiser "0.26"))
 
 ;; This program is free software; you can redistribute it and/or modify
